@@ -28,25 +28,22 @@ public class MainActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, rateList);
         listViewRates.setAdapter(adapter);
 
-        // Load data in background
+        // Load currency rates
         new DataLoader(this).execute("https://api.exchangerate.host/latest");
 
-        // Filtering logic
+        // Filtering functionality
         edtFilter.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 adapter.getFilter().filter(s.toString());
             }
 
-            @Override
-            public void afterTextChanged(Editable s) {}
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override public void afterTextChanged(Editable s) {}
         });
     }
 
-    // Called from DataLoader when data is ready
+    // Called from DataLoader when the API data finishes downloading
     public void updateRates(ArrayList<String> newRates) {
         rateList.clear();
         rateList.addAll(newRates);

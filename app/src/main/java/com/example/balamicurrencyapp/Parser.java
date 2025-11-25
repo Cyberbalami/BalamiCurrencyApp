@@ -12,7 +12,6 @@ public class Parser {
 
         try {
             JSONObject root = new JSONObject(json);
-            String base = root.getString("base");
             JSONObject rates = root.getJSONObject("rates");
 
             Iterator<String> keys = rates.keys();
@@ -20,7 +19,6 @@ public class Parser {
             while (keys.hasNext()) {
                 String currency = keys.next();
                 double value = rates.getDouble(currency);
-
                 list.add(currency + " – " + value);
             }
 

@@ -11,10 +11,11 @@
         android:layout_height="wrap_content"
         android:hint="Enter currency code (e.g. USD)"
         android:inputType="text"
-        android:padding="12dp" />
+        android:padding="12dp"/>
 
     <ListView
         android:id="@+id/listViewRates"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
 </LinearLayout>
