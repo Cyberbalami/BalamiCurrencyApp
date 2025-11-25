@@ -7,7 +7,6 @@ import java.util.Iterator;
 public class Parser {
 
     public static ArrayList<String> parseJSON(String json) {
-
         ArrayList<String> list = new ArrayList<>();
 
         try {
@@ -15,10 +14,10 @@ public class Parser {
             JSONObject rates = root.getJSONObject("rates");
 
             Iterator<String> keys = rates.keys();
-
             while (keys.hasNext()) {
                 String currency = keys.next();
                 double value = rates.getDouble(currency);
+
                 list.add(currency + " – " + value);
             }
 

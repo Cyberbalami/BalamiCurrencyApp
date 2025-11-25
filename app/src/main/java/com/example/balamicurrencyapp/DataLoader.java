@@ -19,7 +19,6 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<String>> {
 
     @Override
     protected ArrayList<String> doInBackground(String... urls) {
-
         StringBuilder response = new StringBuilder();
 
         try {
@@ -27,15 +26,16 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<String>> {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.connect();
 
-            BufferedReader reader =
-                    new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(connection.getInputStream())
+            );
 
             String line;
             while ((line = reader.readLine()) != null) {
                 response.append(line);
             }
 
-            Log.d("API_DATA", response.toString());  // DEBUG
+            Log.d("API_DATA", response.toString());
 
             return Parser.parseJSON(response.toString());
 

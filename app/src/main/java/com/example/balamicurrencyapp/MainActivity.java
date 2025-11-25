@@ -7,6 +7,7 @@ import android.text.TextWatcher;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,22 +29,21 @@ public class MainActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, rateList);
         listViewRates.setAdapter(adapter);
 
-        // Load currency rates
+        // Download currency rates
         new DataLoader(this).execute("https://api.exchangerate.host/latest");
 
-        // Filtering functionality
+        // Filtering
         edtFilter.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                adapter.getFilter().filter(s.toString());
+                adapter.getFilter().filter(s);
             }
-
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override public void afterTextChanged(Editable s) {}
         });
     }
 
-    // Called from DataLoader when the API data finishes downloading
+    // Update ListView content
     public void updateRates(ArrayList<String> newRates) {
         rateList.clear();
         rateList.addAll(newRates);
